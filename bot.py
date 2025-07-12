@@ -5,7 +5,7 @@ import json
 import random
 import asyncio
 
-TOKEN = "YOUR_BOT_TOKEN"  # Replace this with your token
+TOKEN = "7777252416:AAG_KLzRrj1sHQ6SU6FynPbgw2xXZCxZGoM"  # Replace this with your token
 
 # Load custom replies
 with open("replies.json", "r", encoding="utf-8") as f:
