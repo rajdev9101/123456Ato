@@ -3,7 +3,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, fil
 import json
 import random
 
-TOKEN = "PASTE_YOUR_BOT_TOKEN_HERE"  # <-- Replace this
+TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"  # <-- Replace this
 
 # Load custom replies
 with open("replies.json", "r", encoding="utf-8") as f:
