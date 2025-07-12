@@ -6,7 +6,7 @@ import json
 import random
 import asyncio
 
-TOKEN = "YOUR_BOT_TOKEN"  # Replace this
+TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"  # Replace this
 
 with open("replies.json", "r", encoding="utf-8") as f:
     replies = json.load(f)
