@@ -63,7 +63,7 @@ async def auto_reply(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(replies[text])
     else:
         # Animated emoji fallback
-        animated_emojis = ["😜", "😂", "💥", "🔥", "🤖", "❤️‍🔥"]
+        animated_emojis = ["😈", "⚡", "🥰", "🥳", "😘", "❤️‍🔥", "😂", "♥️", "💋", "🥵", "🎉", "🤢"]
         await update.message.reply_text(random.choice(animated_emojis))
 
 # Welcome new members
