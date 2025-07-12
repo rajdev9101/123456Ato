@@ -6,7 +6,7 @@ import json
 import random
 
 # Replace with your bot token
-TOKEN = "YOUR_BOT_TOKEN"
+TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"
 
 # Load custom replies from JSON
 with open("replies.json", "r", encoding="utf-8") as f:
