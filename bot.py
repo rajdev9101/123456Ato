@@ -1,6 +1,5 @@
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
-# don't remove credit @raj_dev_01
 from telegram import Update, InputMediaPhoto, Message, ChatMemberUpdated
 from telegram.constants import ChatAction
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ChatMemberHandler, filters, ContextTypes
@@ -38,7 +37,6 @@ def save_json(filename, data):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 # Check settings
-
 def is_auto_delete_enabled(chat_id: str) -> bool:
     return settings.get(chat_id, {}).get("auto_delete", True)
 
@@ -91,7 +89,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 /rajkumar - View uploaded photos
 /settings - Emoji & features
 /groups - Show/remove groups
-/offilter - Add reply: hi = hello
+/offilter - Add reply: hi = hello or remove hi
 /autodelete on/off - Enable/disable delete
 """, parse_mode="Markdown")
 
@@ -193,13 +191,31 @@ async def groups_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             await send_and_auto_delete(update, context, text="ℹ️ No groups added yet.")
 
-# /offilter
+# ✅ /offilter with add/remove
 async def offilter(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
-        await send_and_auto_delete(update, context, text="🧠 Use: /offilter hi = hello")
+        await send_and_auto_delete(update, context, text="🧠 Use:\n/offilter hi = hello\n/offilter remove hi")
         return
+
+    joined = " ".join(context.args)
+
+    # Remove entry
+    if joined.lower().startswith("remove"):
+        try:
+            _, key = joined.split("remove", 1)
+            key = key.strip().lower()
+            if key in replies:
+                del replies[key]
+                save_json(REPLIES_FILE, replies)
+                await send_and_auto_delete(update, context, text=f"🗑 Removed reply: {key}")
+            else:
+                await send_and_auto_delete(update, context, text="⚠️ Keyword not found.")
+        except:
+            await send_and_auto_delete(update, context, text="❌ Use: /offilter remove hi")
+        return
+
+    # Add or update entry
     try:
-        joined = " ".join(context.args)
         key, val = joined.split("=", 1)
         key, val = key.strip().lower(), val.strip()
         replies[key] = val
@@ -286,3 +302,5 @@ app.add_handler(ChatMemberHandler(welcome, ChatMemberHandler.CHAT_MEMBER))
 
 print("🤖 Bot is running... powered by @raj_dev_01")
 app.run_polling()
+                       
+# don't remove credit @raj_dev_01
