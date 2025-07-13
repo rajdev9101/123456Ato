@@ -28,7 +28,7 @@ emoji_index = 0
 user_settings = {}
 
 # ✅ Working .jpg photo link
-PHOTO_LINK = "https://telegra.ph/file/8659b327d44b154f24bd0.jpg"
+PHOTO_LINK = "https://envs.sh/eVP.jpg"
 
 # ✅ /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
