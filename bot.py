@@ -1,188 +1,216 @@
-# don't remove credit powered by @raj_dev_0 
-# don't remove credit @raj_dev_01        
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
-import json
-import random
-import time
+# don't remove credit @raj_dev_01
+from telegram import Update, InputMediaPhoto
+from telegram.constants import ChatAction
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ChatMemberHandler, filters, ContextTypes
+from gtts import gTTS
+from io import BytesIO
+import asyncio, json, random, os
 
-# ✅ Replace this with your actual bot token
-TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"
+TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"  # Replace with your token
 
-# ✅ Load replies.json
+# File paths
 REPLIES_FILE = "replies.json"
-with open(REPLIES_FILE, "r", encoding="utf-8") as f:
-    replies = json.load(f)
+PHOTOS_FILE = "photos.json"
+EMOJIS_FILE = "emojis.json"
+GROUPS_FILE = "groups.json"
 
-def save_replies():
-    with open(REPLIES_FILE, "w", encoding="utf-8") as f:
-        json.dump(replies, f, ensure_ascii=False, indent=2)
+# Load or create files
+def load_json(filename, default):
+    if os.path.exists(filename):
+        with open(filename, "r", encoding="utf-8") as f:
+            return json.load(f)
+    else:
+        return default
 
-# ✅ Emojis
-like_emojis = ["❤️", "👍", "🔥", "😍", "💯", "🥰", "😂", "🎉", "🤩", "👏"]
-animated_emojis = [
-    "🎉", "⚡", "🔥", "🥰", "👋", "🥳", "💋", "🥵", "🤯", "😂", "🎊", "🤮",
-    "❤️", "💖", "💔", "🙉", "😡", "🤩", "✨", "🙈", "🥵", "🥳", "❤️‍🔥", "🤡"
-]
-emoji_index = 0
-user_settings = {}
+replies = load_json(REPLIES_FILE, {})
+photos = load_json(PHOTOS_FILE, [])
+emojis = load_json(EMOJIS_FILE, {})
+groups = load_json(GROUPS_FILE, [])
 
-# ✅ Working .jpg photo link
-PHOTO_LINK = "https://envs.sh/eVP.jpg"
+# Save helpers
+def save_json(filename, data):
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
-# ✅ /start
+# Typing simulation
+async def simulate_typing(update: Update, context: ContextTypes.DEFAULT_TYPE, delay=3.0):
+    await context.bot.send_chat_action(chat_id=update.effective_chat.id, action=ChatAction.TYPING)
+    await asyncio.sleep(delay)
+
+# /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("🤖 bot successfully started, powered by @raj_dev_01 🚀")
+    await simulate_typing(update, context)
+    await update.message.reply_text("👋 Welcome! I'm alive and kicking, powered by @raj_dev_01 🚀")
+    emoji_reactions = ["❤️", "🔥", "😍", "😄", "🤖", "🥳", "💯", "😘", "😎", "😂"]
+    await update.message.reply_text(random.choice(emoji_reactions))
+    if photos:
+        await context.bot.send_photo(chat_id=update.effective_chat.id, photo=random.choice(photos))
 
-# ✅ /help
+# /help
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await simulate_typing(update, context)
     await update.message.reply_text(
-        "💡 Commands:\n"
-        "/start - Welcome\n"
-        "/help - Show help\n"
-        "/ping - Check latency\n"
-        "/alive - Status check\n"
-        "/font <text> - Stylish fonts\n"
-        "/raj - Photo in PM only\n"
-        "/rajkumar - Public photo\n"
-        "/professor - Photo + channel\n"
-        "/settings - View toggles\n"
-        "/set like on/off OR emoji on/off\n"
-        "/offilter key = value (Add reply)\n"
-        "/offilter key (Delete reply)"
+        "🤖 *Bot Commands:*\n"
+        "/start - Show welcome & animation\n"
+        "/help - Show this help\n"
+        "/alive - Check if bot is alive\n"
+        "/ping - Test bot latency\n"
+        "/font - Fancy font style\n"
+        "/say - Speak with voice\n"
+        "/raj - Upload photo (PM only, JPG)\n"
+        "/rajkumar - Show uploaded photos\n"
+        "/settings - Set emoji for this group\n"
+        "/groups - List & remove groups\n\n"
+        "_Just message me anything!_", parse_mode="Markdown"
     )
 
-# ✅ /ping
-async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    start = time.time()
-    await update.message.reply_text("🏓 Pong!")
-    latency = round((time.time() - start) * 1000)
-    await update.message.reply_text(f"⏱ {latency} ms")
-
-# ✅ /alive
+# /alive
 async def alive(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("✅ Bot is alive & running. Powered by @raj_dev_01")
+    await simulate_typing(update, context)
+    await update.message.reply_text("✅ I'm alive and running!")
 
-# ✅ /font (10 styles)
-def convert_font(text: str, style_index: int = 0) -> str:
-    fonts = [
-        str.maketrans("abcdefghijklmnopqrstuvwxyz", "𝒶𝒷𝒸𝒹ℯ𝒻ℊ𝒽𝒾𝒿𝓀𝓁𝓂𝓃ℴ𝓅𝓆𝓇𝓈𝓉𝓊𝓋𝓌𝓍𝓎𝓏"),
-        str.maketrans("abcdefghijklmnopqrstuvwxyz", "🅐🅑🅒🅓🅔🅕🅖🅗🅘🅙🅚🅛🅜🅝🅞🅟🅠🅡🅢🅣🅤🅥🅦🅧🅨🅩"),
-        str.maketrans("abcdefghijklmnopqrstuvwxyz", "𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷"),
-        str.maketrans("abcdefghijklmnopqrstuvwxyz", "𝓪𝓫𝓬𝓭𝓮𝓯𝓰𝓱𝓲𝓳𝓴𝓵𝓶𝓷𝓸𝓹𝓺𝓻𝓼𝓽𝓾𝓿𝔀𝔁𝔂𝔃"),
-        str.maketrans("abcdefghijklmnopqrstuvwxyz", "𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫"),
-        str.maketrans("abcdefghijklmnopqrstuvwxyz", "🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉"),
-        str.maketrans("abcdefghijklmnopqrstuvwxyz", "αв¢∂єƒgнιנкℓмησρqяѕтυνωχуz"),
-        str.maketrans("abcdefghijklmnopqrstuvwxyz", "ค๒ς๔єŦɠђเןкl๓ภ๏קợгรՇยשฬאץչ"),
-        str.maketrans("abcdefghijklmnopqrstuvwxyz", "ΔβCÐΣFGHIJKLMNΘPQRSTƱVWXΨZ".lower()),
-        str.maketrans("abcdefghijklmnopqrstuvwxyz", "🝐🝑🝒🝓🝔🝕🝖🝗🝘🝙🝚🝛🝜🝝🝞🝟🝠🝡🝢🝣🝤🝥🝦🝧🝨🝩")
-    ]
-    return text.lower().translate(fonts[style_index % len(fonts)])
+# /ping
+async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await simulate_typing(update, context)
+    await update.message.reply_text("🏓 Pong!")
 
+# /font
 async def font(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if context.args:
-        await update.message.reply_text(convert_font(" ".join(context.args), random.randint(0, 9)))
-    else:
-        await update.message.reply_text("⚠️ Usage: /font <your text>")
-
-# ✅ Photo Commands
-async def raj(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.message.chat.type != "private":
-        await update.message.reply_text("⚠️ Only available in private chat.")
-    else:
-        await update.message.reply_photo(PHOTO_LINK, caption="📸 Here's your photo. Only PM can upload.")
-
-async def rajkumar(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_photo(PHOTO_LINK, caption="🌟 Raj’s photo for all viewers.")
-
-async def professor(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    caption = (
-        "📸 Here's my photo & movie channel:\n"
-        "🎬 Free movies daily on [Movie Hub](https://t.me/+u4cmm3JmIrFlNzZl)\n"
-        "🔥 Subscribe now and enjoy binge-watching!"
-    )
-    await update.message.reply_photo(PHOTO_LINK, caption=caption, parse_mode="Markdown")
-
-# ✅ Settings
-async def settings(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    uid = update.effective_user.id
-    s = user_settings.get(uid, {"like": True, "emoji": True})
-    await update.message.reply_text(
-        f"⚙️ *Your Settings:*\n👍 Like Emojis: {'ON' if s['like'] else 'OFF'}\n🔁 Auto Emojis: {'ON' if s['emoji'] else 'OFF'}",
-        parse_mode="Markdown"
-    )
-
-async def set_setting(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    uid = update.effective_user.id
-    if len(context.args) != 2:
-        await update.message.reply_text("⚠️ Usage: /set like on/off OR emoji on/off")
-        return
-    setting, value = context.args
-    if setting not in ["like", "emoji"] or value not in ["on", "off"]:
-        await update.message.reply_text("❌ Invalid setting or value.")
-        return
-    if uid not in user_settings:
-        user_settings[uid] = {"like": True, "emoji": True}
-    user_settings[uid][setting] = value == "on"
-    await update.message.reply_text(f"✅ {setting.capitalize()} set to {value.upper()}.")
-
-# ✅ Add/Delete reply
-async def offilter(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
-        await update.message.reply_text("⚠️ Usage:\nTo add: /offilter hi = hello\nTo delete: /offilter hi")
+        await update.message.reply_text("✍️ Use: /font yourtext")
+        return
+    text = " ".join(context.args)
+    fancy = f"𝗕𝗼𝗹𝗱: {text}\n𝘼𝙡𝙩: {text[::-1]}"
+    await simulate_typing(update, context)
+    await update.message.reply_text(fancy)
+
+# /say
+async def say(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not context.args:
+        await update.message.reply_text("🔊 Use: /say your message")
+        return
+    text = " ".join(context.args)
+    tts = gTTS(text=text, lang='en')
+    buf = BytesIO()
+    tts.write_to_fp(buf)
+    buf.seek(0)
+    await update.message.reply_voice(voice=buf)
+
+# /raj
+async def raj(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.effective_chat.type != "private":
+        await update.message.reply_text("❌ Only PM users can add photos.")
+        return
+    if context.args:
+        url = context.args[0]
+        if url.endswith(".jpg"):
+            photos.append(url)
+            save_json(PHOTOS_FILE, photos)
+            await update.message.reply_text("✅ Photo added.")
+        else:
+            await update.message.reply_text("❌ Only JPG links allowed.")
+    else:
+        await update.message.reply_text("📸 Send photo like: /raj https://example.com/image.jpg")
+
+# /rajkumar
+async def rajkumar(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if photos:
+        await update.message.reply_photo(random.choice(photos))
+    else:
+        await update.message.reply_text("😕 No photo uploaded yet.")
+
+# /groups
+async def groups_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    chat_id = str(update.effective_chat.id)
+    if context.args and context.args[0] == "remove":
+        if chat_id in groups:
+            groups.remove(chat_id)
+            save_json(GROUPS_FILE, groups)
+            await update.message.reply_text("✅ Group removed.")
+        else:
+            await update.message.reply_text("⚠️ This group not tracked.")
+    else:
+        if groups:
+            msg = "\n".join([f"- {gid}" for gid in groups])
+            await update.message.reply_text(f"📃 Tracked Groups:\n{msg}")
+        else:
+            await update.message.reply_text("ℹ️ No groups added yet.")
+
+# /settings
+async def settings(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    chat_id = str(update.effective_chat.id)
+    if len(context.args) == 1:
+        emoji = context.args[0]
+        emojis[chat_id] = emoji
+        save_json(EMOJIS_FILE, emojis)
+        await update.message.reply_text(f"✅ Emoji set to {emoji}")
+    else:
+        current = emojis.get(chat_id, "Not set")
+        await update.message.reply_text(f"ℹ️ Current emoji: {current}\nUse: /settings 😍")
+
+# Welcome
+async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    for member in update.chat_member.new_chat_members:
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text=f"👋 Welcome {member.full_name}! Powered by @raj_dev_01 🚀"
+        )
+    cid = str(update.chat_member.chat.id)
+    if cid not in groups:
+        groups.append(cid)
+        save_json(GROUPS_FILE, groups)
+
+# Auto-reply
+sent_emojis = {}
+async def auto_reply(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    text = update.message.text.lower()
+    cid = str(update.effective_chat.id)
+    await simulate_typing(update, context)
+
+    if text in ["hi", "hey", "hello"]:
+        responses = replies.get(text, ["Hi there!", "Hello!", "Hey! What's up?"])
+        await update.message.reply_text(random.choice(responses))
         return
 
-    joined = " ".join(context.args)
-    if "=" in joined:
-        key, value = map(str.strip, joined.split("=", 1))
-        replies[key.lower()] = value
-        save_replies()
-        await update.message.reply_text(f"✅ Reply added: '{key}' → '{value}'")
-    else:
-        key = joined.lower()
-        if key in replies:
-            del replies[key]
-            save_replies()
-            await update.message.reply_text(f"❌ Removed reply for '{key}'")
-        else:
-            await update.message.reply_text("🔍 No such reply found.")
-
-# ✅ Auto reply
-async def auto_reply(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    global emoji_index
-    uid = update.effective_user.id
-    text = update.message.text.lower()
-    s = user_settings.get(uid, {"like": True, "emoji": True})
-
-    if text in ["hi", "hay"]:
-        await update.message.reply_text("Hello dear, how are you? 🥰")
-        if s["like"]:
-            await update.message.reply_text(random.choice(like_emojis))
+    if "raj" in text:
+        await update.message.reply_text("Yeah, I am here. Powered by @raj_dev_01 ⚡")
         return
 
     if text in replies:
-        await update.message.reply_text(replies[text])
-    elif s["emoji"]:
-        emoji = animated_emojis[emoji_index % len(animated_emojis)]
-        emoji_index += 1
+        reply = replies[text]
+        if isinstance(reply, list):
+            reply = random.choice(reply)
+        await update.message.reply_text(reply)
+    else:
+        default_emojis = ["❤️", "😂", "😍", "🔥", "😄", "😎", "🥳", "😘", "💯", "🤖"]
+        used = sent_emojis.get(cid, [])
+        remaining = [e for e in default_emojis if e not in used]
+        emoji = random.choice(remaining or default_emojis)
         await update.message.reply_text(emoji)
+        if len(used) >= len(default_emojis):
+            sent_emojis[cid] = []
+        else:
+            used.append(emoji)
+            sent_emojis[cid] = used
 
-# ✅ App Init
+# App setup
 app = ApplicationBuilder().token(TOKEN).build()
+
+# Handlers
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("help", help_command))
-app.add_handler(CommandHandler("ping", ping))
 app.add_handler(CommandHandler("alive", alive))
+app.add_handler(CommandHandler("ping", ping))
 app.add_handler(CommandHandler("font", font))
+app.add_handler(CommandHandler("say", say))
 app.add_handler(CommandHandler("raj", raj))
 app.add_handler(CommandHandler("rajkumar", rajkumar))
-app.add_handler(CommandHandler("professor", professor))
+app.add_handler(CommandHandler("groups", groups_cmd))
 app.add_handler(CommandHandler("settings", settings))
-app.add_handler(CommandHandler("set", set_setting))
-app.add_handler(CommandHandler("offilter", offilter))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, auto_reply))
+app.add_handler(ChatMemberHandler(welcome, ChatMemberHandler.CHAT_MEMBER))
 
+# Run bot
 if __name__ == "__main__":
     print("🤖 Bot is running... powered by @raj_dev_01")
     app.run_polling()
-                   
