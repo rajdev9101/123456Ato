@@ -1,12 +1,13 @@
 # don't remove credit @raj_dev_01
-from telegram import Update, InputMediaPhoto, Message
+# don't remove credit @raj_dev_01
+from telegram import Update, InputMediaPhoto, Message, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.constants import ChatAction
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ChatMemberHandler, filters, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ChatMemberHandler, CallbackQueryHandler, filters, ContextTypes
 from gtts import gTTS
 from io import BytesIO
 import asyncio, json, random, os, time
 
-TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"  # Replace with your token
+TOKEN = "YOUR_BOT_TOKEN"  # Replace with your token
 DELETE_DELAY = 5 * 60 * 60  # 5 hours in seconds
 
 # File paths
@@ -81,7 +82,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/say - Speak with voice\n"
         "/raj - Upload photo (PM only, JPG)\n"
         "/rajkumar - Show uploaded photos\n"
-        "/settings - Set emoji for this group\n"
+        "/settings - Bot settings with buttons\n"
         "/groups - List & remove groups\n"
         "/autodelete on/off - Enable/Disable message auto delete\n"
         "/offilter - Set reply like: hi = hello\n"
@@ -145,37 +146,49 @@ async def raj(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def rajkumar(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if photos:
         await simulate_typing(update, context)
-        media = [InputMediaPhoto(media=photo) for photo in photos[:10]]
-        if len(media) == 1:
-            msg = await update.message.reply_photo(photo=media[0].media)
+        for photo in photos:
+            msg = await update.message.reply_photo(photo=photo)
             auto_delete(msg, context)
-        else:
-            msgs = await context.bot.send_media_group(chat_id=update.effective_chat.id, media=media)
-            for m in msgs:
-                auto_delete(m, context)
     else:
         await send_and_auto_delete(update, context, text="😕 No photo uploaded yet.")
 
-# /autodelete
-async def autodelete(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    chat_id = str(update.effective_chat.id)
-    if not context.args:
-        status = "enabled" if is_auto_delete_enabled(chat_id) else "disabled"
-        await send_and_auto_delete(update, context, text=f"🛠 Auto-delete is currently {status}. Use /autodelete on/off")
+# /offilter
+async def offilter(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not context.args or '=' not in ' '.join(context.args):
+        await send_and_auto_delete(update, context, text="⚙️ Use: /offilter hello = hi")
         return
-    arg = context.args[0].lower()
-    if arg in ["on", "enable"]:
+    parts = ' '.join(context.args).split('=')
+    if len(parts) != 2:
+        await send_and_auto_delete(update, context, text="⚠️ Invalid format. Use: /offilter hi = hello")
+        return
+    key = parts[0].strip().lower()
+    value = parts[1].strip()
+    replies[key] = value
+    save_json(REPLIES_FILE, replies)
+    await send_and_auto_delete(update, context, text=f"✅ Reply set: '{key}' → '{value}'")
+
+# /settings with buttons
+async def settings_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    chat_id = str(update.effective_chat.id)
+    auto = settings.get(chat_id, {}).get("auto_delete", True)
+    buttons = [
+        [InlineKeyboardButton(f"Auto-delete: {'✅ ON' if auto else '❌ OFF'}", callback_data="toggle_autodelete")]
+    ]
+    markup = InlineKeyboardMarkup(buttons)
+    await update.message.reply_text("⚙️ Settings Panel:", reply_markup=markup)
+
+async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+    chat_id = str(query.message.chat.id)
+
+    if query.data == "toggle_autodelete":
+        current = settings.get(chat_id, {}).get("auto_delete", True)
         settings[chat_id] = settings.get(chat_id, {})
-        settings[chat_id]["auto_delete"] = True
+        settings[chat_id]["auto_delete"] = not current
         save_json(SETTINGS_FILE, settings)
-        await send_and_auto_delete(update, context, text="✅ Auto-delete enabled.")
-    elif arg in ["off", "disable"]:
-        settings[chat_id] = settings.get(chat_id, {})
-        settings[chat_id]["auto_delete"] = False
-        save_json(SETTINGS_FILE, settings)
-        await send_and_auto_delete(update, context, text="❌ Auto-delete disabled.")
-    else:
-        await send_and_auto_delete(update, context, text="⚠️ Use: /autodelete on OR /autodelete off")
+        new_status = '✅ ON' if not current else '❌ OFF'
+        await query.edit_message_text(f"🔁 Auto-delete is now {new_status}")
 
 # Setup app
 app = ApplicationBuilder().token(TOKEN).build()
@@ -189,7 +202,10 @@ app.add_handler(CommandHandler("font", font))
 app.add_handler(CommandHandler("say", say))
 app.add_handler(CommandHandler("raj", raj))
 app.add_handler(CommandHandler("rajkumar", rajkumar))
-app.add_handler(CommandHandler("autodelete", autodelete))
+app.add_handler(CommandHandler("autodelete", settings_command))
+app.add_handler(CommandHandler("offilter", offilter))
+app.add_handler(CommandHandler("settings", settings_command))
+app.add_handler(CallbackQueryHandler(button_handler))
 
 # Start polling
 print("🤖 Bot is running... powered by @raj_dev_01")
