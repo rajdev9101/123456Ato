@@ -6,7 +6,7 @@ from gtts import gTTS
 from io import BytesIO
 import asyncio, json, random, os
 
-TOKEN = "YOUR_BOT_TOKEN"  # Replace with your token
+TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"  # Replace with your token
 
 # File paths
 REPLIES_FILE = "replies.json"
