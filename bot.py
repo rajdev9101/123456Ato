@@ -11,9 +11,9 @@ import random
 import asyncio
 import os
 
-TOKEN = "YOUR_BOT_TOKEN"
+TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"
 ADMIN_USERNAME = "@raj_dev_01"
-PHOTO_LINK = "https://example.com/raj.jpg"  # Replace with your JPG link
+PHOTO_LINK = "https://envs.sh/eVP.jpg"  # Replace with your JPG link
 
 # Load replies
 with open("replies.json", "r", encoding="utf-8") as f:
