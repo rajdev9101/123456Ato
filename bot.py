@@ -1,5 +1,6 @@
 # don't remove credit @raj_dev_01
-from telegram import Update, InputMediaPhoto, Message
+# don't remove credit @raj_dev_01
+from telegram import Update, InputMediaPhoto, Message, ChatMemberUpdated
 from telegram.constants import ChatAction
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ChatMemberHandler, filters, ContextTypes
 from gtts import gTTS
@@ -35,12 +36,16 @@ def save_json(filename, data):
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-# Check if auto delete is enabled for chat
+# Check settings
+
 def is_auto_delete_enabled(chat_id: str) -> bool:
     return settings.get(chat_id, {}).get("auto_delete", True)
 
 def is_reaction_enabled(chat_id: str) -> bool:
     return settings.get(chat_id, {}).get("reaction", True)
+
+def is_autoreply_enabled(chat_id: str) -> bool:
+    return settings.get(chat_id, {}).get("autoreply", True)
 
 # Typing simulation
 async def simulate_typing(update: Update, context: ContextTypes.DEFAULT_TYPE, delay=1.0):
@@ -62,97 +67,37 @@ async def send_photo_and_auto_delete(update: Update, context: ContextTypes.DEFAU
     msg = await context.bot.send_photo(chat_id=update.effective_chat.id, photo=photo)
     auto_delete(msg, context)
 
-# /start
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await simulate_typing(update, context)
-    await send_and_auto_delete(update, context, text="👋 Welcome! I'm alive and kicking, powered by @raj_dev_01 🚀")
-    emoji_reactions = ["❤️", "🔥", "😍", "😄", "🤖", "🥳", "💯", "😘", "😎", "😂"]
-    await send_and_auto_delete(update, context, text=random.choice(emoji_reactions))
-    if photos:
-        await send_photo_and_auto_delete(update, context, random.choice(photos))
-
-# /help
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await simulate_typing(update, context)
-    msg = await update.message.reply_text(
-        "🤖 *Bot Commands:*\n"
-        "/start - Show welcome & animation\n"
-        "/help - Show this help\n"
-        "/alive - Check if bot is alive\n"
-        "/ping - Show bot response time\n"
-        "/font - Fancy font style\n"
-        "/say - Speak with voice\n"
-        "/raj - Upload photo (PM only, JPG)\n"
-        "/rajkumar - Show uploaded photos\n"
-        "/settings emoji 😍\n"
-        "/settings reaction on/off\n"
-        "/groups - List & remove groups\n"
-        "/autodelete on/off - Enable/Disable message auto delete\n"
-        "/offilter hi = hello\n\n"
-        "_Just message me anything!_", parse_mode="Markdown")
-    auto_delete(msg, context)
-
-# /alive
-async def alive(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await simulate_typing(update, context)
-    await send_and_auto_delete(update, context, text="✅ I'm alive and running!")
-
-# /ping
-async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    start_time = time.time()
-    msg = await update.message.reply_text("⏱ Calculating ping...")
-    end_time = time.time()
-    latency = int((end_time - start_time) * 1000)
-    await msg.edit_text(f"📡 Ping: {latency} ms")
-    auto_delete(msg, context)
-
-# /font
-async def font(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not context.args:
-        await send_and_auto_delete(update, context, text="✍️ Use: /font yourtext")
-        return
-    text = " ".join(context.args)
-    fancy = f"𝗕𝗼𝗹𝗱: {text}\n𝘼𝙡𝙩: {text[::-1]}"
-    await simulate_typing(update, context)
-    await send_and_auto_delete(update, context, text=fancy)
-
-# /say
-async def say(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not context.args:
-        await send_and_auto_delete(update, context, text="🔊 Use: /say your message")
-        return
-    text = " ".join(context.args)
-    tts = gTTS(text=text, lang='en')
-    buf = BytesIO()
-    tts.write_to_fp(buf)
-    buf.seek(0)
-    msg = await update.message.reply_voice(voice=buf)
-    auto_delete(msg, context)
-
-# /raj
-async def raj(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_chat.type != "private":
-        await send_and_auto_delete(update, context, text="❌ Only PM users can add photos.")
-        return
-    if context.args:
-        url = context.args[0]
-        if url.lower().endswith(".jpg"):
-            photos.append(url)
-            save_json(PHOTOS_FILE, photos)
-            await send_and_auto_delete(update, context, text="✅ Photo added.")
+# /groups
+async def groups_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    cid = str(update.effective_chat.id)
+    if context.args and context.args[0] == "remove":
+        if cid in groups:
+            groups.remove(cid)
+            save_json(GROUPS_FILE, groups)
+            await send_and_auto_delete(update, context, text="✅ Group removed.")
         else:
-            await send_and_auto_delete(update, context, text="❌ Only JPG links allowed.")
+            await send_and_auto_delete(update, context, text="⚠️ Group not found.")
     else:
-        await send_and_auto_delete(update, context, text="📸 Send photo like: /raj https://example.com/image.jpg")
+        if groups:
+            msg = "\n".join(groups)
+            await send_and_auto_delete(update, context, text=f"📋 Groups:\n{msg}")
+        else:
+            await send_and_auto_delete(update, context, text="ℹ️ No groups added yet.")
 
-# /rajkumar
-async def rajkumar(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if photos:
-        await simulate_typing(update, context)
-        for photo in photos[:10]:
-            await send_photo_and_auto_delete(update, context, photo)
-    else:
-        await send_and_auto_delete(update, context, text="😕 No photo uploaded yet.")
+# /offilter
+async def offilter(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not context.args:
+        await send_and_auto_delete(update, context, text="🧠 Use: /offilter hi = hello")
+        return
+    try:
+        joined = " ".join(context.args)
+        key, val = joined.split("=", 1)
+        key, val = key.strip().lower(), val.strip()
+        replies[key] = val
+        save_json(REPLIES_FILE, replies)
+        await send_and_auto_delete(update, context, text=f"✅ Added: {key} → {val}")
+    except:
+        await send_and_auto_delete(update, context, text="❌ Format error. Use: /offilter hi = hello")
 
 # /settings
 async def settings_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -160,24 +105,61 @@ async def settings_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
         emoji = emojis.get(chat_id, "Not set")
         react = "on" if is_reaction_enabled(chat_id) else "off"
-        await send_and_auto_delete(update, context, text=f"Emoji: {emoji}\nReaction: {react}\nUse /settings emoji 😍 OR /settings reaction on")
+        reply = "on" if is_autoreply_enabled(chat_id) else "off"
+        await send_and_auto_delete(update, context, text=f"Emoji: {emoji}\nReaction: {react}\nAuto-reply: {reply}\nUse /settings emoji 😍 OR /settings reaction on OR /settings autoreply off")
         return
     if context.args[0] == "emoji" and len(context.args) == 2:
         emojis[chat_id] = context.args[1]
         save_json(EMOJIS_FILE, emojis)
         await send_and_auto_delete(update, context, text=f"✅ Emoji set to {context.args[1]}")
-    elif context.args[0] == "reaction" and len(context.args) == 2:
-        if context.args[1].lower() in ["on", "off"]:
-            settings[chat_id] = settings.get(chat_id, {})
-            settings[chat_id]["reaction"] = context.args[1].lower() == "on"
-            save_json(SETTINGS_FILE, settings)
-            await send_and_auto_delete(update, context, text=f"✅ Reaction set to {context.args[1].lower()}")
+    elif context.args[0] in ["reaction", "autoreply"] and len(context.args) == 2:
+        key = context.args[0]
+        value = context.args[1].lower() == "on"
+        settings[chat_id] = settings.get(chat_id, {})
+        settings[chat_id][key] = value
+        save_json(SETTINGS_FILE, settings)
+        await send_and_auto_delete(update, context, text=f"✅ {key.capitalize()} set to {context.args[1].lower()}")
     else:
-        await send_and_auto_delete(update, context, text="⚙️ Use: /settings emoji 😍 OR /settings reaction on/off")
+        await send_and_auto_delete(update, context, text="⚙️ Use: /settings emoji 😍 OR /settings reaction on/off OR /settings autoreply on/off")
 
-# Add handler
+# Welcome new members and track groups
+async def welcome(update: ChatMemberUpdated, context: ContextTypes.DEFAULT_TYPE):
+    member = update.chat_member.new_chat_member
+    if member:
+        await context.bot.send_message(chat_id=update.chat_member.chat.id, text=f"👋 Welcome {member.user.full_name}! Powered by @raj_dev_01 🚀")
+    cid = str(update.chat_member.chat.id)
+    if cid not in groups:
+        groups.append(cid)
+        save_json(GROUPS_FILE, groups)
+
+# Auto-reply handler
+sent_emojis = {}
+async def auto_reply(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    text = update.message.text.lower()
+    cid = str(update.effective_chat.id)
+    await simulate_typing(update, context, delay=0.8)
+
+    if not is_autoreply_enabled(cid):
+        return
+
+    if text in replies:
+        await send_and_auto_delete(update, context, text=replies[text])
+        return
+
+    if is_reaction_enabled(cid):
+        default_emojis = ["❤️", "😂", "😍", "🔥", "😄", "😎", "🥳", "😘", "💯", "🤖"]
+        used = sent_emojis.get(cid, [])
+        remaining = [e for e in default_emojis if e not in used]
+        emoji = random.choice(remaining or default_emojis)
+        await send_and_auto_delete(update, context, text=emoji)
+        if len(used) >= len(default_emojis):
+            sent_emojis[cid] = []
+        else:
+            used.append(emoji)
+            sent_emojis[cid] = used
+
+# Register
 app = ApplicationBuilder().token(TOKEN).build()
-
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("help", help_command))
 app.add_handler(CommandHandler("alive", alive))
@@ -187,6 +169,11 @@ app.add_handler(CommandHandler("say", say))
 app.add_handler(CommandHandler("raj", raj))
 app.add_handler(CommandHandler("rajkumar", rajkumar))
 app.add_handler(CommandHandler("settings", settings_cmd))
+app.add_handler(CommandHandler("autodelete", autodelete))
+app.add_handler(CommandHandler("groups", groups_cmd))
+app.add_handler(CommandHandler("offilter", offilter))
+app.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), auto_reply))
+app.add_handler(ChatMemberHandler(welcome, ChatMemberHandler.CHAT_MEMBER))
 
 print("🤖 Bot is running... powered by @raj_dev_01")
 app.run_polling()
