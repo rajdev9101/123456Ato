@@ -12,7 +12,7 @@ import random
 import asyncio
 import os
 
-TOKEN = "YOUR_BOT_TOKEN"  # ← यहां अपना Bot Token डालना है
+TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"  # ← यहां अपना Bot Token डालना है
 ADMIN_USERNAME = "@raj_dev_01"
 PHOTO_LINK = "https://example.com/raj.jpg"  # ← यहां अपनी JPG लिंक दो
 
