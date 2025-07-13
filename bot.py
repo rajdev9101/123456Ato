@@ -7,7 +7,7 @@ import random
 import time
 
 # ✅ Replace this with your actual bot token
-TOKEN = "YOUR_BOT_TOKEN"
+TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"
 
 # ✅ Load replies.json
 REPLIES_FILE = "replies.json"
