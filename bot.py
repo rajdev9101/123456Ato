@@ -6,7 +6,7 @@ import json
 import random
 import time
 
-TOKEN = "YOUR_BOT_TOKEN"  # Replace with your bot token
+TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"  # Replace with your bot token
 
 REPLIES_FILE = "replies.json"
 with open(REPLIES_FILE, "r", encoding="utf-8") as f:
@@ -25,7 +25,7 @@ emoji_index = 0
 user_settings = {}
 
 # ✅ Use working .jpg photo link (replace this with your own valid link)
-PHOTO_LINK = "https://telegra.ph/file/8659b327d44b154f24bd0.jpg"
+PHOTO_LINK = "https://envs.sh/eVP.jpg"
 
 # ✨ /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
