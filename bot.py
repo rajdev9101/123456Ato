@@ -32,7 +32,7 @@ PHOTO_LINK = "https://envs.sh/eVP.jpg"
 
 # ✅ /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("👋 Welcome! I'm alive, powered by @raj_dev_01 🚀")
+    await update.message.reply_text("🤖 bot successfully started, powered by @raj_dev_01 🚀")
 
 # ✅ /help
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
