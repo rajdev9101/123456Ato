@@ -7,7 +7,7 @@ from gtts import gTTS
 from io import BytesIO
 import asyncio, json, random, os, time
 
-TOKEN = "YOUR_BOT_TOKEN"  # Replace with your token
+TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"  # Replace with your token
 DELETE_DELAY = 5 * 60 * 60  # 5 hours in seconds
 
 # File paths
