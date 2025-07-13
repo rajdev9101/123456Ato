@@ -1,13 +1,15 @@
 # don't remove credit powered by @raj_dev_0 
-# don't remove credit @raj_dev_01
+# don't remove credit @raj_dev_01        
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 import json
 import random
 import time
 
-TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"  # Replace with your bot token
+# ✅ Replace this with your actual bot token
+TOKEN = "YOUR_BOT_TOKEN"
 
+# ✅ Load replies.json
 REPLIES_FILE = "replies.json"
 with open(REPLIES_FILE, "r", encoding="utf-8") as f:
     replies = json.load(f)
@@ -16,6 +18,7 @@ def save_replies():
     with open(REPLIES_FILE, "w", encoding="utf-8") as f:
         json.dump(replies, f, ensure_ascii=False, indent=2)
 
+# ✅ Emojis
 like_emojis = ["❤️", "👍", "🔥", "😍", "💯", "🥰", "😂", "🎉", "🤩", "👏"]
 animated_emojis = [
     "😄", "😉", "🔥", "💡", "🚀", "🤖", "🥰", "😘", "😈", "😂", "🎉", "💋",
@@ -24,14 +27,14 @@ animated_emojis = [
 emoji_index = 0
 user_settings = {}
 
-# ✅ Use working .jpg photo link (replace this with your own valid link)
-PHOTO_LINK = "https://envs.sh/eVP.jpg"
+# ✅ Working .jpg photo link
+PHOTO_LINK = "https://telegra.ph/file/8659b327d44b154f24bd0.jpg"
 
-# ✨ /start
+# ✅ /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("👋 Welcome! I'm alive, powered by @raj_dev_01 🚀")
 
-# ✨ /help
+# ✅ /help
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "💡 Commands:\n"
@@ -42,25 +45,25 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/font <text> - Stylish fonts\n"
         "/raj - Photo in PM only\n"
         "/rajkumar - Public photo\n"
-        "/rajbala - Photo + channel link\n"
+        "/professor - Photo + channel\n"
         "/settings - View toggles\n"
-        "/set like on/off or emoji on/off\n"
-        "/offilter hay = hello (Add reply)\n"
-        "/offilter hay (Delete reply)"
+        "/set like on/off OR emoji on/off\n"
+        "/offilter key = value (Add reply)\n"
+        "/offilter key (Delete reply)"
     )
 
-# ✨ /ping
+# ✅ /ping
 async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE):
     start = time.time()
     await update.message.reply_text("🏓 Pong!")
     latency = round((time.time() - start) * 1000)
     await update.message.reply_text(f"⏱ {latency} ms")
 
-# ✨ /alive
+# ✅ /alive
 async def alive(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("✅ Yes, I'm alive & running! Powered by @raj_dev_01")
+    await update.message.reply_text("✅ Bot is alive & running. Powered by @raj_dev_01")
 
-# ✨ /font
+# ✅ /font (10 styles)
 def convert_font(text: str, style_index: int = 0) -> str:
     fonts = [
         str.maketrans("abcdefghijklmnopqrstuvwxyz", "𝒶𝒷𝒸𝒹ℯ𝒻ℊ𝒽𝒾𝒿𝓀𝓁𝓂𝓃ℴ𝓅𝓆𝓇𝓈𝓉𝓊𝓋𝓌𝓍𝓎𝓏"),
@@ -80,9 +83,9 @@ async def font(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.args:
         await update.message.reply_text(convert_font(" ".join(context.args), random.randint(0, 9)))
     else:
-        await update.message.reply_text("⚠️ Usage: /font <text>")
+        await update.message.reply_text("⚠️ Usage: /font <your text>")
 
-# ✨ Photo Commands
+# ✅ Photo Commands
 async def raj(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.message.chat.type != "private":
         await update.message.reply_text("⚠️ Only available in private chat.")
@@ -92,7 +95,7 @@ async def raj(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def rajkumar(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_photo(PHOTO_LINK, caption="🌟 Raj’s photo for all viewers.")
 
-async def rajbala(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def professor(update: Update, context: ContextTypes.DEFAULT_TYPE):
     caption = (
         "📸 Here's my photo & movie channel:\n"
         "🎬 Free movies daily on [Movie Hub](https://t.me/+u4cmm3JmIrFlNzZl)\n"
@@ -100,7 +103,7 @@ async def rajbala(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
     await update.message.reply_photo(PHOTO_LINK, caption=caption, parse_mode="Markdown")
 
-# ✨ Settings
+# ✅ Settings
 async def settings(update: Update, context: ContextTypes.DEFAULT_TYPE):
     uid = update.effective_user.id
     s = user_settings.get(uid, {"like": True, "emoji": True})
@@ -123,7 +126,7 @@ async def set_setting(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_settings[uid][setting] = value == "on"
     await update.message.reply_text(f"✅ {setting.capitalize()} set to {value.upper()}.")
 
-# ✨ Add/Delete Reply in one command
+# ✅ Add/Delete reply
 async def offilter(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
         await update.message.reply_text("⚠️ Usage:\nTo add: /offilter hi = hello\nTo delete: /offilter hi")
@@ -144,7 +147,7 @@ async def offilter(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             await update.message.reply_text("🔍 No such reply found.")
 
-# ✨ Auto reply
+# ✅ Auto reply
 async def auto_reply(update: Update, context: ContextTypes.DEFAULT_TYPE):
     global emoji_index
     uid = update.effective_user.id
@@ -164,7 +167,7 @@ async def auto_reply(update: Update, context: ContextTypes.DEFAULT_TYPE):
         emoji_index += 1
         await update.message.reply_text(emoji)
 
-# ✨ App Init
+# ✅ App Init
 app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("help", help_command))
@@ -173,7 +176,7 @@ app.add_handler(CommandHandler("alive", alive))
 app.add_handler(CommandHandler("font", font))
 app.add_handler(CommandHandler("raj", raj))
 app.add_handler(CommandHandler("rajkumar", rajkumar))
-app.add_handler(CommandHandler("rajbala", rajbala))
+app.add_handler(CommandHandler("professor", professor))
 app.add_handler(CommandHandler("settings", settings))
 app.add_handler(CommandHandler("set", set_setting))
 app.add_handler(CommandHandler("offilter", offilter))
@@ -182,3 +185,4 @@ app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, auto_reply))
 if __name__ == "__main__":
     print("🤖 Bot is running... powered by @raj_dev_01")
     app.run_polling()
+                   
