@@ -6,7 +6,7 @@ from gtts import gTTS
 from io import BytesIO
 import asyncio, json, random, os
 
-TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"  # Replace with your token
+TOKEN = "YOUR_BOT_TOKEN"  # Replace with your token
 
 # File paths
 REPLIES_FILE = "replies.json"
@@ -207,7 +207,7 @@ app.add_handler(CommandHandler("raj", raj))
 app.add_handler(CommandHandler("rajkumar", rajkumar))
 app.add_handler(CommandHandler("groups", groups_cmd))
 app.add_handler(CommandHandler("settings", settings))
-app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, auto_reply))
+app.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), auto_reply))
 app.add_handler(ChatMemberHandler(welcome, ChatMemberHandler.CHAT_MEMBER))
 
 # Run bot
