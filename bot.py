@@ -1,6 +1,7 @@
 # don't remove credit powered by @raj_dev_01
 # don't remove credit powered by @raj_dev_01
 # don't remove credit @raj_dev_01
+# don't remove credit @raj_dev_01
 from telegram import Update
 from telegram.constants import ChatAction
 from telegram.ext import (
@@ -66,11 +67,11 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"🤖 This bot replies smartly & shows emoji animations!\n"
         f"👥 Works in groups too! Just add me and chat freely\n"
         f"🔧 Commands:\n"
-        f"/start - Welcome@raj_dev_01\n"
-        f"/help - This help menu@raj_dev_01\n"
-        f"/settings 😈 😘 🔥 - Set custom emojis powered by @raj_dev_01\n"
-        f"/settings reset - Delete saved emojis@raj_dev_01\n"
-        f"/groups - List all groups bot is in (admin only@raj_dev_01)\n"
+        f"/start - Welcome\n"
+        f"/help - This help menu\n"
+        f"/settings - Set custom emojis\n"
+        f"/settings reset - Delete saved emojis\n"
+        f"/groups - List all groups bot is in (admin only)\n"
         f"/raj - PM-only photo\n"
         f"/rajkumar - Public photo\n\n"
         f"💬 Keep chatting! Powered by {ADMIN_USERNAME}"
@@ -169,10 +170,11 @@ app.add_handler(CommandHandler("help", help_command))
 app.add_handler(CommandHandler("settings", settings))
 app.add_handler(CommandHandler("groups", groups))
 app.add_handler(CommandHandler("raj", raj))
-app.add_handler(CommandHandler("rajdev", rajdev))
+app.add_handler(CommandHandler("rajkumar", rajkumar))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, auto_reply))
 app.add_handler(ChatMemberHandler(group_tracker, ChatMemberHandler.CHAT_MEMBER))
 
 if __name__ == "__main__":
     print("🤖 Bot is running... powered by @raj_dev_01")
     app.run_polling()
+                              
