@@ -1178,5 +1178,423 @@
   "which Indian state has the most population?": "Uttar Pradesh",
   "what is the longest river in India?": "Ganga",
   "which is the highest mountain peak in India?": "Kangchenjunga",
-  "which is the smallest state in India?": "Goa"
- }
+  "which is the smallest state in India?": "Goa",
+  "what is the capital of india?": "New Delhi",
+  "capital of india?": "New Delhi",
+  "india ki rajdhani kya hai?": "New Delhi",
+  "who is the prime minister of india?": "Narendra Modi",
+  "prime minister of india?": "Narendra Modi",
+  "pm india?": "Narendra Modi",
+  "who is the current president of india?": "Droupadi Murmu",
+  "bharat ke rashtrapati kaun hai?": "Droupadi Murmu",
+  "who discovered gravity?": "Isaac Newton",
+  "gravity kisne discover kiya?": "Isaac Newton",
+  "who invented the light bulb?": "Thomas Edison",
+  "light bulb kisne banaya?": "Thomas Edison",
+  "how many colors are there in a rainbow?": "7",
+  "rainbow me kitne colors hote hain?": "7",
+  "who invented the computer?": "Charles Babbage",
+  "which is the largest planet in the solar system?": "Jupiter",
+  "which is the smallest bone in the human body?": "Stapes (in the ear)",
+  "what is the national anthem of the USA?": "The Star-Spangled Banner",
+  "who is the CEO of Tesla?": "Elon Musk",
+  "how many hours are there in a day?": "24",
+  "how many zeros are there in one million?": "6",
+  "which country invented paper?": "China",
+  "what is the hardest natural substance?": "Diamond",
+  "what do bees make?": "Honey",
+  "which animal is known as the king of the jungle?": "Lion",
+  "which instrument measures temperature?": "Thermometer",
+  "who is known as the missile man of India?": "Dr. A. P. J. Abdul Kalam",
+  "how many teeth does an adult human have?": "32",
+  "which planet is closest to the sun?": "Mercury",
+  "what is the full form of NASA?": "National Aeronautics and Space Administration",
+  "which Indian scientist won a Nobel Prize for Physics?": "C. V. Raman",
+  "who is the author of Harry Potter?": "J.K. Rowling",
+  "which gas is used to fill balloons?": "Helium",
+  "how many months have 31 days?": "7",
+  "how many colors are there in the Indian flag?": "Three (Saffron, White, Green) + Ashoka Chakra (Blue)",
+  "which planet has rings around it?": "Saturn",
+  "what is the national reptile of India?": "King Cobra",
+  "which country has the most number of time zones?": "France",
+  "which is the first country to reach Mars?": "India (ISRO - Mangalyaan)",
+  "which city is known as the Silicon Valley of India?": "Bengaluru",
+  "how many hearts does an octopus have?": "Three",
+  "which animal never sleeps?": "Bullfrog",
+  "how many chromosomes are in a human cell?": "46",
+  "which organ purifies blood in the human body?": "Kidney",
+  "what is the fear of heights called?": "Acrophobia",
+  "which bird lays the largest egg?": "Ostrich",
+  "what is the baby of a kangaroo called?": "Joey",
+  "which Indian city is known as the Pink City?": "Jaipur",
+  "who was the first woman Prime Minister of India?": "Indira Gandhi",
+  "what is the full form of ATM?": "Automated Teller Machine",
+  "how many moons does Earth have?": "One",
+  "which fruit floats on water?": "Apple",
+  "which festival is called the festival of colors?": "Holi",
+  "which month has the fewest days?": "February",
+  "what is the capital of india?": "New Delhi",
+  "india ki rajdhani kya hai?": "New Delhi",
+  "capital city of india?": "New Delhi",
+  "name the capital of india": "New Delhi",
+  "where is the capital of india?": "New Delhi",
+  "what's the name of india's capital?": "New Delhi",
+  "which city is the capital of india?": "New Delhi",
+  "bharat ki rajdhani kya hai?": "New Delhi",
+  "india ka capital city kaunsa hai?": "New Delhi",
+  "rajdhani of india?": "New Delhi",
+  "who is the president of india?": "Droupadi Murmu",
+  "current president of india?": "Droupadi Murmu",
+  "bharat ke rashtrapati kaun hai?": "Droupadi Murmu",
+  "india ka president kaun hai?": "Droupadi Murmu",
+  "rashtrapati of india?": "Droupadi Murmu",
+  "name of india’s president?": "Droupadi Murmu",
+
+  "what is the national animal of india?": "Tiger",
+  "india ka rashtriya pashu kya hai?": "Tiger",
+  "national animal of india?": "Tiger",
+  "bharat ka rashtriya janwar kya hai?": "Tiger",
+  "national pashu of bharat?": "Tiger",
+  "which is india’s national animal?": "Tiger",
+
+  "which is the national river of india?": "Ganga",
+  "india ki rashtriya nadi kaunsi hai?": "Ganga",
+  "national river of india?": "Ganga",
+  "bharat ki rashtriya nadi kya hai?": "Ganga",
+  "india ka national river?": "Ganga",
+
+  "which is the national bird of india?": "Peacock",
+  "india ka rashtriya pakshi kya hai?": "Peacock",
+  "national bird of india?": "Peacock",
+  "bharat ka rashtriya pakshi kya hai?": "Peacock",
+  "india’s bird symbol?": "Peacock",
+
+  "which is the national flower of india?": "Lotus",
+  "india ka rashtriya phool kya hai?": "Lotus",
+  "national flower of india?": "Lotus",
+  "bharat ka rashtriya phool kya hai?": "Lotus",
+  "india ka flower symbol?": "Lotus",
+
+  "which is the national fruit of india?": "Mango",
+  "india ka rashtriya phal kya hai?": "Mango",
+  "national fruit of india?": "Mango",
+  "bharat ka rashtriya phal kya hai?": "Mango",
+  "india ka fruit symbol?": "Mango",
+
+  "what is the national game of india?": "Hockey (unofficially)",
+  "india ka rashtriya khel kya hai?": "Hockey (unofficially)",
+  "national game of india?": "Hockey (unofficially)",
+  "bharat ka rashtriya khel kya hai?": "Hockey (unofficially)",
+  "official sport of india?": "Hockey (unofficially)",
+
+  "who is known as the iron man of india?": "Sardar Vallabhbhai Patel",
+  "india ka loh purush kaun hai?": "Sardar Vallabhbhai Patel",
+  "iron man of india?": "Sardar Vallabhbhai Patel",
+  "bharat ke iron man kaun hai?": "Sardar Vallabhbhai Patel",
+  "india ke loh purush kaun hai?": "Sardar Vallabhbhai Patel",
+
+  
+  "what is the capital of assam?": "Dispur",
+  "assam ki rajdhani kya hai?": "Dispur",
+  "capital of assam?": "Dispur",
+  "name the capital city of assam": "Dispur",
+  "dispur is the capital of which indian state?": "Assam",
+
+  "what is the official language of assam?": "Assamese",
+  "assam ki official language kya hai?": "Assamese",
+  "language spoken in assam?": "Assamese",
+  "what language do people speak in assam?": "Assamese",
+
+  "what is the state bird of assam?": "White-winged Wood Duck",
+  "assam ka rajya pakshi kya hai?": "White-winged Wood Duck",
+  "state bird of assam?": "White-winged Wood Duck",
+  "white-winged wood duck is the state bird of which state?": "Assam",
+
+  "what is the state animal of assam?": "One-horned Rhinoceros",
+  "assam ka rajya pashu kya hai?": "One-horned Rhinoceros",
+  "state animal of assam?": "One-horned Rhinoceros",
+  "rhinoceros is the state animal of which indian state?": "Assam",
+
+  "what is the famous festival of assam?": "Bihu",
+  "assam ka pramukh tyohar kya hai?": "Bihu",
+  "main festival celebrated in assam?": "Bihu",
+  "bihu is celebrated in which state?": "Assam",
+
+  "which river flows through assam?": "Brahmaputra",
+  "brahmaputra flows in which indian state?": "Assam",
+  "river passing through assam?": "Brahmaputra",
+  "assam me kaun si nadi behti hai?": "Brahmaputra",
+
+  "who is the current chief minister of assam?": "Himanta Biswa Sarma",
+  "assam ke mukhyamantri kaun hai?": "Himanta Biswa Sarma",
+  "cm of assam?": "Himanta Biswa Sarma",
+  "present cm of assam?": "Himanta Biswa Sarma",
+
+  "what is the state flower of assam?": "Foxtail Orchid",
+  "assam ka rajya phool kya hai?": "Foxtail Orchid",
+  "state flower of assam?": "Foxtail Orchid",
+  "foxtail orchid is the flower of which state?": "Assam",
+
+  "what is the state dance of assam?": "Bihu Dance",
+  "assam ka pramukh nritya kya hai?": "Bihu Dance",
+  "famous dance form of assam?": "Bihu Dance",
+  "bihu dance belongs to which state?": "Assam",
+
+  "what is assam famous for?": "Tea and one-horned rhinoceros",
+  "assam kis chiz ke liye mashhoor hai?": "Tea and one-horned rhinoceros",
+  "assam is known for?": "Tea and one-horned rhinoceros",
+  "what makes assam famous?": "Tea and one-horned rhinoceros",
+
+  "where is kaziranga national park located?": "Assam",
+  "kaziranga national park is in which state?": "Assam",
+  "which state has kaziranga park?": "Assam",
+  "kaziranga belongs to which indian state?": "Assam",
+
+  "which is the biggest river in assam?": "Brahmaputra",
+  "assam ki sabse badi nadi kaunsi hai?": "Brahmaputra",
+  "largest river flowing in assam?": "Brahmaputra",
+
+  "what is the state tree of assam?": "Hollong",
+  "assam ka rajya vriksh kya hai?": "Hollong",
+  "which is assam’s state tree?": "Hollong",
+
+  "what is the literacy rate of assam?": "Around 73%",
+  "assam ki saksharta dar kya hai?": "Around 73%",
+  "how literate is assam?": "Around 73%",
+
+  "what is the traditional dress of assamese women?": "Mekhela Chador",
+  "assam ki mahilayein kya traditional kapda pehenti hain?": "Mekhela Chador",
+  "name of traditional female dress in assam?": "Mekhela Chador",
+
+  "who is the governor of assam?": "Gulab Chand Kataria",
+  "assam ke governor kaun hain?": "Gulab Chand Kataria",
+  "current governor of assam?": "Gulab Chand Kataria",
+
+  "what is the population of assam?": "Around 3.5 crore (35 million)",
+  "kitni jansankhya hai assam ki?": "Around 3.5 crore (35 million)",
+  "assam ki population kitni hai?": "Around 3.5 crore (35 million)",
+
+  "what is the area of assam?": "78,438 sq km",
+  "assam ka kshetrafal kya hai?": "78,438 sq km",
+  "how big is assam in area?": "78,438 sq km",
+
+  "when was assam formed?": "26 January 1950",
+  "assam kab bana tha?": "26 January 1950",
+  "formation date of assam?": "26 January 1950",
+  
+  "which dance form originated in assam?": "Sattriya",
+  "sattriya dance belongs to which state?": "Assam",
+  "classical dance of assam?": "Sattriya",
+  "assam ka classical nritya kaun sa hai?": "Sattriya",
+
+  "how many districts are there in assam?": "35",
+  "assam me kitne jile hai?": "35",
+  "number of districts in assam?": "35",
+  "kitne districts hain assam me?": "35",
+
+  "which university is famous in assam?": "Gauhati University",
+  "popular university in assam?": "Gauhati University",
+  "assam ki mashhoor vishwavidyalaya kaunsi hai?": "Gauhati University",
+
+  "what is the airport name in guwahati?": "Lokpriya Gopinath Bordoloi International Airport",
+  "guwahati ka airport ka kya naam hai?": "Lokpriya Gopinath Bordoloi International Airport",
+  "name of guwahati international airport?": "Lokpriya Gopinath Bordoloi International Airport",
+
+  "which national parks are in assam?": "Kaziranga, Manas, Orang, Nameri, Raimona, Dehing Patkai",
+  "assam me kaun kaun se national park hai?": "Kaziranga, Manas, Orang, Nameri, Raimona, Dehing Patkai",
+  "name national parks in assam?": "Kaziranga, Manas, Orang, Nameri, Raimona, Dehing Patkai",
+
+  "which tea is famous from assam?": "Assam Tea",
+  "assam ki mashhoor chai kaunsi hai?": "Assam Tea",
+  "what kind of tea comes from assam?": "Assam Tea",
+  "popular tea type in assam?": "Assam Tea",
+
+  "who was the first cm of assam?": "Gopinath Bordoloi",
+  "assam ke pehle mukhyamantri kaun the?": "Gopinath Bordoloi",
+  "first chief minister of assam?": "Gopinath Bordoloi",
+
+  "what is the folk music of assam?": "Bihu Geet",
+  "assam ki lok sangeet ka kya naam hai?": "Bihu Geet",
+  "folk songs of assam?": "Bihu Geet",
+
+  "which tribe is found in assam?": "Bodo",
+  "assam me kaun se tribe rehate hain?": "Bodo",
+  "famous tribe of assam?": "Bodo",
+
+  "assam shares border with how many states?": "8 states",
+  "kitne states se assam border karta hai?": "8 states",
+  "assam ka border kitne rajyon se milta hai?": "8 states",
+  
+  "what is the literacy rate of assam according to 2011 census?": "73.18%",
+  "assam ki saksharta dar 2011 ke anusar kya hai?": "73.18%",
+  "literacy percentage of assam?": "73.18%",
+
+  "what is the name of assam's high court?": "Gauhati High Court",
+  "assam ka high court ka kya naam hai?": "Gauhati High Court",
+  "which high court serves assam?": "Gauhati High Court",
+
+  "which temple is famous in assam?": "Kamakhya Temple",
+  "famous temple in assam?": "Kamakhya Temple",
+  "assam me kaunsa mashhoor mandir hai?": "Kamakhya Temple",
+  "kamakhya temple is located in which state?": "Assam",
+
+  "where is sibsagar located?": "Assam",
+  "sibsagar is in which indian state?": "Assam",
+  "sibsagar kis rajya me hai?": "Assam",
+
+  "which city is known as the gateway to northeast?": "Guwahati",
+  "northeast ka gateway kise kahte hain?": "Guwahati",
+  "gateway of northeast india?": "Guwahati",
+
+  "what is the famous wildlife sanctuary in assam?": "Pobitora Wildlife Sanctuary",
+  "pobitora wildlife sanctuary is in which state?": "Assam",
+  "wildlife sanctuary in assam?": "Pobitora Wildlife Sanctuary",
+
+  "which oil refinery is located in assam?": "Digboi Oil Refinery",
+  "digboi oil refinery kis rajya me hai?": "Assam",
+  "assam ki oil refinery ka naam kya hai?": "Digboi Oil Refinery",
+
+  "which river island is located in assam?": "Majuli",
+  "majuli is in which state?": "Assam",
+  "largest river island in assam?": "Majuli",
+
+  "which city is the largest in assam?": "Guwahati",
+  "biggest city of assam?": "Guwahati",
+  "assam ka sabse bada shahar kaunsa hai?": "Guwahati",
+
+  "what is the main industry in assam?": "Tea Industry",
+  "assam ki mukhya udyog kya hai?": "Tea Industry",
+  "main occupation or industry in assam?": "Tea Industry",
+  
+  "what is the total number of assembly seats in assam?": "126",
+  "how many assembly constituencies in assam?": "126",
+  "assam me kitni vidhan sabha seats hai?": "126",
+  "number of legislative assembly seats in assam?": "126",
+
+  "which state is famous for tea production in india?": "Assam",
+  "tea producing state in india?": "Assam",
+  "india ka tea capital kaunsa state hai?": "Assam",
+
+  "who was the first governor of assam?": "Sir Muhammad Saleh Akbar Hydari",
+  "pehle governor kaun the assam ke?": "Sir Muhammad Saleh Akbar Hydari",
+  "first rajyapal of assam?": "Sir Muhammad Saleh Akbar Hydari",
+
+  "which wildlife sanctuary is famous for golden langur?": "Manas Wildlife Sanctuary",
+  "golden langur kaha milta hai assam me?": "Manas Wildlife Sanctuary",
+  "golden langur found in which assam sanctuary?": "Manas Wildlife Sanctuary",
+
+  "what is the official state festival of assam?": "Rongali Bihu",
+  "assam ka official tyohar kya hai?": "Rongali Bihu",
+  "state festival of assam?": "Rongali Bihu",
+
+  "in which year did assam become a full-fledged state?": "1950",
+  "assam poorn rajya kab bana?": "1950",
+  "year when assam became state?": "1950",
+
+  "which city of assam is known for silk production?": "Sualkuchi",
+  "assam ka silk town kaunsa hai?": "Sualkuchi",
+  "sualkuchi kis chiz ke liye mashhoor hai?": "Silk production",
+
+  "which university is located in tezpur?": "Tezpur University",
+  "tezpur me kaun si vishwavidyalaya hai?": "Tezpur University",
+  "university in tezpur assam?": "Tezpur University",
+
+  "which sanctuary in assam is known for wild buffalo?": "Laokhowa Wildlife Sanctuary",
+  "assam me wild buffalo kaha milta hai?": "Laokhowa Wildlife Sanctuary",
+  "wild buffalo sanctuary in assam?": "Laokhowa Wildlife Sanctuary",
+
+  "what is the traditional musical instrument of assam?": "Pepa",
+  "assam ka traditional instrument kya hai?": "Pepa",
+  "which musical instrument is used in bihu?": "Pepa",
+  
+  "who is known as the bard of brahmaputra?": "Bhupen Hazarika",
+  "brahmaputra ke bard kise kehte hain?": "Bhupen Hazarika",
+  "bhupen hazarika is known by what title?": "Bard of Brahmaputra",
+
+  "which folk theatre form is popular in assam?": "Ankiya Naat",
+  "assam ka lok natya kaun sa hai?": "Ankiya Naat",
+  "famous assamese traditional drama?": "Ankiya Naat",
+
+  "what is the meaning of assam?": "Land of the Ahoms",
+  "assam ka matlab kya hota hai?": "Land of the Ahoms",
+  "assam word originates from?": "Ahom kingdom",
+
+  "which airport is in dibrugarh?": "Mohanbari Airport",
+  "dibrugarh ka airport ka naam kya hai?": "Mohanbari Airport",
+  "name the airport located in dibrugarh?": "Mohanbari Airport",
+
+  "where is nameri national park located?": "Assam",
+  "nameri national park kis state me hai?": "Assam",
+  "nameri park belongs to which indian state?": "Assam",
+
+  "what is the assam state song called?": "O Mur Apunar Desh",
+  "assam ka rajya geet kya hai?": "O Mur Apunar Desh",
+  "state anthem of assam?": "O Mur Apunar Desh",
+
+  "which town in assam is known for oil industry?": "Digboi",
+  "digboi kis liye mashhoor hai?": "Oil industry",
+  "oil town of assam?": "Digboi",
+
+  "which hill station is located in assam?": "Haflong",
+  "assam ka hill station kaunsa hai?": "Haflong",
+  "only hill station in assam?": "Haflong",
+
+  "which insurgent group is active in assam?": "ULFA (United Liberation Front of Assam)",
+  "ulfa stands for?": "United Liberation Front of Assam",
+  "terrorist group in assam?": "ULFA",
+
+  "which art form uses masks in assam?": "Mukha Bhaona",
+  "mask dance or play of assam?": "Mukha Bhaona",
+  "assam me mukhota wala kala kaun si hai?": "Mukha Bhaona",
+  
+  "which freedom fighter is from assam?": "Kanaklata Barua",
+  "freedom fighter of assam?": "Kanaklata Barua",
+  "assam ki swatantrata senani kaun thi?": "Kanaklata Barua",
+
+  "who was the founder of ahom dynasty?": "Sukaphaa",
+  "ahom vansh ka sthapak kaun tha?": "Sukaphaa",
+  "founder of ahom kingdom in assam?": "Sukaphaa",
+
+  "which district is largest in assam by area?": "Karbi Anglong",
+  "assam ka sabse bada zila kaunsa hai?": "Karbi Anglong",
+  "largest district of assam area-wise?": "Karbi Anglong",
+
+  "when is bihu celebrated?": "January, April, and October",
+  "bihu kab hota hai?": "January, April, and October",
+  "months of bihu in assam?": "January, April, and October",
+
+  "which city in assam is known for educational institutions?": "Tezpur",
+  "tezpur kis chiz ke liye mashhoor hai?": "Educational Institutions",
+  "education hub of assam?": "Tezpur",
+
+  "who built the rang ghar in assam?": "King Rudra Singha",
+  "rang ghar kisne banwaya tha?": "King Rudra Singha",
+  "builder of rang ghar monument in assam?": "King Rudra Singha",
+
+  "what is the assam state museum located in?": "Guwahati",
+  "assam state museum kaha hai?": "Guwahati",
+  "location of assam rajya sangrahalaya?": "Guwahati",
+
+  "which form of classical music is found in assam?": "Borgeet",
+  "assam ka classical sangeet kya hai?": "Borgeet",
+  "borgit is a form of music in which state?": "Assam",
+
+  "which tribe is known for their bamboo handicrafts in assam?": "Mishing Tribe",
+  "mishing tribe kis kala ke liye mashhoor hai?": "Bamboo Handicrafts",
+  "bamboo work tribe in assam?": "Mishing Tribe",
+
+  "which assamese leader is known for taal war?": "Lachit Borphukan",
+  "lachit borphukan kis ke liye mashhoor the?": "Battle of Saraighat",
+  "assam ke legendary warrior kaun hai?": "Lachit Borphukan"
+}
+
+
+
+
+
+
+  
+
+
+
+
