@@ -1,6 +1,9 @@
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
+# don't remove credit @raj_dev_01
+# don't remove credit @raj_dev_01
+# don't remove credit @raj_dev_01
 from telegram import Update, InputMediaPhoto, Message, ChatMemberUpdated
 from telegram.constants import ChatAction
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ChatMemberHandler, filters, ContextTypes
@@ -56,6 +59,7 @@ async def send_photo_and_auto_delete(update, context, photo):
 async def start(update, context):
     await simulate_typing(update, context)
     await send_and_auto_delete(update, context, text="👋 Welcome! I'm alive and kicking, powered by @raj_dev_01 🚀")
+    await send_and_auto_delete(update, context, text="📸 Follow me on Instagram: https://instagram.com/itz_rajdev")
     emojis_list = ["❤️", "🔥", "😍", "😄", "🤖", "🥳", "💯", "😘", "😎", "😂"]
     await send_and_auto_delete(update, context, text=random.choice(emojis_list))
     if photos:
@@ -163,7 +167,6 @@ async def groups_cmd(update, context):
         msg = "\n".join(groups) if groups else "ℹ️ No groups added yet."
         await send_and_auto_delete(update, context, text=f"📋 Groups:\n{msg}")
 
-# ✅ Smart /offilter
 async def offilter(update, context):
     if not context.args:
         await send_and_auto_delete(update, context, text="🧠 Use:\n/offilter hi = hello\n/offilter remove hi\n/offilter hi")
@@ -227,6 +230,20 @@ async def welcome(update: ChatMemberUpdated, context):
         groups.append(cid)
         save_json(GROUPS_FILE, groups)
 
+# ✅ Group Added Custom Message
+async def group_join_welcome(update: ChatMemberUpdated, context):
+    result = update.chat_member
+    if result.new_chat_member.status in ["member", "administrator", "creator"]:
+        if result.old_chat_member.status == "left":
+            await context.bot.send_message(
+                chat_id=update.chat_member.chat.id,
+                text=(
+                    f"🔰 Hello everyone! aap sabhi ko dhanyvad mere ko is group mein add karne ke liye niche Mera Instagram hai agar baat karna hai to message karna👇.\n"
+                    f"📸 Follow on Instagram: https://www.instagram.com/itz_dminem_official43?igsh=MTZpNGMwOGwwMWl5dA=="
+                    f"✅ Powered by 👉@raj_dev_01"
+                )
+            )
+
 sent_emojis = {}
 async def auto_reply(update, context):
     text = update.message.text.lower()
@@ -260,6 +277,7 @@ app.add_handler(CommandHandler("groups", groups_cmd))
 app.add_handler(CommandHandler("offilter", offilter))
 app.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), auto_reply))
 app.add_handler(ChatMemberHandler(welcome, ChatMemberHandler.CHAT_MEMBER))
+app.add_handler(ChatMemberHandler(group_join_welcome, ChatMemberHandler.MY_CHAT_MEMBER))
 
 print("🤖 Bot is running... powered by @raj_dev_01")
 app.run_polling()
