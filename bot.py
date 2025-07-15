@@ -4,7 +4,10 @@
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
-from telegram import Update, InputMediaPhoto, Message, ChatMemberUpdated
+  # don't remove credit @raj_dev_01
+# don't remove credit @raj_dev_01
+# don't remove credit @raj_dev_01
+from telegram import Update, InputMediaPhoto, ChatMemberUpdated
 from telegram.constants import ChatAction
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ChatMemberHandler, filters, ContextTypes
 from gtts import gTTS
@@ -59,8 +62,6 @@ async def send_photo_and_auto_delete(update, context, photo):
 async def start(update, context):
     await simulate_typing(update, context)
     await send_and_auto_delete(update, context, text="👋 Welcome! I'm alive and kicking, powered by @raj_dev_01 🚀")
-    emojis_list = ["❤️", "🔥", "😍", "😄", "🤖", "🥳", "💯", "😘", "😎", "😂"]
-    await send_and_auto_delete(update, context, text=random.choice(emojis_list))
     if photos:
         await send_photo_and_auto_delete(update, context, random.choice(photos))
 
@@ -229,47 +230,24 @@ async def welcome(update: ChatMemberUpdated, context):
         groups.append(cid)
         save_json(GROUPS_FILE, groups)
 
-# ✅ Smart auto-reply logic (FIXED VERSION)
-sent_emojis = {}
-message_count = {}
+# ✅ Updated auto-reply: only daily short text (NO EMOJI)
 random_text_replies = [
-    "hmm?", "kya bol rahe ho?", "samjha nahi 😅", "tum ajeeb ho 😂",
-    "phir se bolo...", "main kya karu iska?", "interesting 🤔",
-    "aur?", "repeat karo please!", "yeh kya tha?"
+    "ok", "hmm?", "haan", "nahi", "kya haal hai?", "kaise ho?", "main theek hoon", "batao?", "kya chal raha hai?",
+    "samajh gaya", "sahi hai", "mujhe pasand aaya", "accha laga", "repeat karo", "kya bola?", "phir se", "acha", "hmm", "hahaha"
 ]
 
 async def auto_reply(update, context):
     text = update.message.text.lower()
     cid = str(update.effective_chat.id)
     await simulate_typing(update, context, delay=0.8)
-
-    if not is_autoreply_enabled(cid):
-        return
-
-    message_count[cid] = message_count.get(cid, 0) + 1
-    current_count = message_count[cid]
-
+    if not is_autoreply_enabled(cid): return
     if text in replies:
         await send_and_auto_delete(update, context, text=replies[text])
-        return
-
-    if current_count % 15 == 0 and is_reaction_enabled(cid):
-        all_emojis = ["❤️", "😂", "😍", "🔥", "😄", "😎", "🥳", "😘", "💯", "🤖"]
-        used = sent_emojis.get(cid, [])
-        remaining = [e for e in all_emojis if e not in used]
-        emoji = random.choice(remaining or all_emojis)
-        await send_and_auto_delete(update, context, text=emoji)
-        if len(used) >= len(all_emojis):
-            sent_emojis[cid] = []
-        else:
-            used.append(emoji)
-            sent_emojis[cid] = used
     else:
-        if random.random() < 0.6:
-            reply = random.choice(random_text_replies)
-            await send_and_auto_delete(update, context, text=reply)
+        reply = random.choice(random_text_replies)
+        await send_and_auto_delete(update, context, text=reply)
 
-# Register handlers
+# Register
 app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("help", help_command))
@@ -288,7 +266,7 @@ app.add_handler(ChatMemberHandler(welcome, ChatMemberHandler.CHAT_MEMBER))
 
 print("🤖 Bot is running... powered by @raj_dev_01")
 app.run_polling()
-        
+                      
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
