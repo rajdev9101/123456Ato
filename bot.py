@@ -1,7 +1,6 @@
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
-
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
@@ -230,11 +229,12 @@ async def welcome(update: ChatMemberUpdated, context):
         groups.append(cid)
         save_json(GROUPS_FILE, groups)
 
-# ✅ Smart auto-reply logic
+# ✅ Smart auto-reply logic (FIXED VERSION)
 sent_emojis = {}
+message_count = {}
 random_text_replies = [
-    "hmm?", "kya bol rahe ho?", "samjha nahi 😅", "tum ajeeb ho 😂", 
-    "phir se bolo...", "main kya karu iska?", "interesting 🤔", 
+    "hmm?", "kya bol rahe ho?", "samjha nahi 😅", "tum ajeeb ho 😂",
+    "phir se bolo...", "main kya karu iska?", "interesting 🤔",
     "aur?", "repeat karo please!", "yeh kya tha?"
 ]
 
@@ -246,26 +246,30 @@ async def auto_reply(update, context):
     if not is_autoreply_enabled(cid):
         return
 
+    message_count[cid] = message_count.get(cid, 0) + 1
+    current_count = message_count[cid]
+
     if text in replies:
         await send_and_auto_delete(update, context, text=replies[text])
+        return
+
+    if current_count % 15 == 0 and is_reaction_enabled(cid):
+        all_emojis = ["❤️", "😂", "😍", "🔥", "😄", "😎", "🥳", "😘", "💯", "🤖"]
+        used = sent_emojis.get(cid, [])
+        remaining = [e for e in all_emojis if e not in used]
+        emoji = random.choice(remaining or all_emojis)
+        await send_and_auto_delete(update, context, text=emoji)
+        if len(used) >= len(all_emojis):
+            sent_emojis[cid] = []
+        else:
+            used.append(emoji)
+            sent_emojis[cid] = used
     else:
-        rand = random.random()
-        if rand < 0.3 and is_reaction_enabled(cid):
-            all_emojis = ["❤️", "😂", "😍", "🔥", "😄", "😎", "🥳", "😘", "💯", "🤖"]
-            used = sent_emojis.get(cid, [])
-            remaining = [e for e in all_emojis if e not in used]
-            emoji = random.choice(remaining or all_emojis)
-            await send_and_auto_delete(update, context, text=emoji)
-            if len(used) >= len(all_emojis):
-                sent_emojis[cid] = []
-            else:
-                used.append(emoji)
-                sent_emojis[cid] = used
-        elif rand < 0.5:
+        if random.random() < 0.6:
             reply = random.choice(random_text_replies)
             await send_and_auto_delete(update, context, text=reply)
 
-# Register
+# Register handlers
 app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("help", help_command))
@@ -284,11 +288,12 @@ app.add_handler(ChatMemberHandler(welcome, ChatMemberHandler.CHAT_MEMBER))
 
 print("🤖 Bot is running... powered by @raj_dev_01")
 app.run_polling()
-    
+        
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
-                
+   #Na Hai mujhe Koi force main nahin karta Kisi Ko rost Bus Sara din focus yahi Jaise dekh rahe ho mere dost karta hun main kam aur dikhata hun
+#         Mera Naam bus dekhte jao abhi to maine shuru Kiya Hai    
