@@ -37,7 +37,7 @@ def is_auto_delete_enabled(chat_id): return settings.get(chat_id, {}).get("auto_
 def is_reaction_enabled(chat_id): return settings.get(chat_id, {}).get("reaction", True)
 def is_autoreply_enabled(chat_id): return settings.get(chat_id, {}).get("autoreply", True)
 
-async def simulate_typing(update, context, delay=4.0):
+async def simulate_typing(update, context, delay=1.0):
     await context.bot.send_chat_action(chat_id=update.effective_chat.id, action=ChatAction.TYPING)
     await asyncio.sleep(delay)
 
