@@ -58,7 +58,7 @@ async def send_photo_and_auto_delete(update, context, photo):
 
 async def start(update, context):
     await simulate_typing(update, context)
-    await send_and_auto_delete(update, context, text="👋 Hi kaisi ho isase Milo yah Mera Boss Hai Instagram ID De Diya, powered by @raj_dev_01 🚀")
+    await send_and_auto_delete(update, context, text="👋 Hi kaisi ho isase Milo yah Mera Boss Hai Instagram ID De Diya https://www.instagram.com/itz_dminem_official43?igsh=MTZpNGMwOGwwMWl5dA==, powered by @raj_dev_01 🚀")
     await send_and_auto_delete(update, context, text="📸 Follow me on Instagram: https://www.instagram.com/itz_dminem_official43?igsh=MTZpNGMwOGwwMWl5dA==")
     emojis_list = ["❤️", "🔥", "😍", "😄", "🤖", "🥳", "💯", "😘", "😎", "😂"]
     await send_and_auto_delete(update, context, text=random.choice(emojis_list))
