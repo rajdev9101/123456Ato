@@ -126,7 +126,7 @@ async def raj(update, context):
         else:
             await send_and_auto_delete(update, context, text="❌ Only JPG links allowed.")
     else:
-        await send_and_auto_delete(update, context, text="📸 Use: /raj https://example.com/image.jpg")
+        await send_and_auto_delete(update, context, text="📸 Use: /raj https://example raj.com/image.jpg")
 
 async def rajkumar(update, context):
     if photos:
@@ -248,7 +248,7 @@ sent_emojis = {}
 async def auto_reply(update, context):
     text = update.message.text.lower()
     cid = str(update.effective_chat.id)
-    await simulate_typing(update, context, delay=0.8)
+    await simulate_typing(update, context, delay=5.20)
     if not is_autoreply_enabled(cid): return
     if text in replies:
         await send_and_auto_delete(update, context, text=replies[text])
