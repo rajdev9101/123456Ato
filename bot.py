@@ -4,6 +4,9 @@
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
+# don't remove credit @raj_dev_01
+# don't remove credit @raj_dev_01
+# don't remove credit @raj_dev_01
 from telegram import Update, InputMediaPhoto, Message, ChatMemberUpdated
 from telegram.constants import ChatAction
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ChatMemberHandler, filters, ContextTypes
@@ -58,8 +61,7 @@ async def send_photo_and_auto_delete(update, context, photo):
 
 async def start(update, context):
     await simulate_typing(update, context)
-    await send_and_auto_delete(update, context, text="👋 Hi kaisi ho isase Milo yah Mera Boss Hai Instagram ID De Diya https://www.instagram.com/itz_dminem_official43?igsh=MTZpNGMwOGwwMWl5dA==, powered by @raj_dev_01 🚀")
-    await send_and_auto_delete(update, context, text="📸 Follow me on Instagram: https://www.instagram.com/itz_dminem_official43?igsh=MTZpNGMwOGwwMWl5dA==")
+    await send_and_auto_delete(update, context, text="👋 Welcome! I'm alive and kicking, powered by @raj_dev_01 🚀")
     emojis_list = ["❤️", "🔥", "😍", "😄", "🤖", "🥳", "💯", "😘", "😎", "😂"]
     await send_and_auto_delete(update, context, text=random.choice(emojis_list))
     if photos:
@@ -67,7 +69,7 @@ async def start(update, context):
 
 async def help_command(update, context):
     await simulate_typing(update, context)
-    await send_and_auto_delete(update, context, text="""
+    await send_and_auto_delete(update, context, text=\"\"\"
 🤖 *Bot Commands:*
 /start - Show welcome & animation
 /help - Show this help
@@ -81,7 +83,7 @@ async def help_command(update, context):
 /groups - Show/remove groups
 /offilter - Add: hi = hello / remove hi / show hi
 /autodelete on/off - Enable/disable delete
-""", parse_mode="Markdown")
+\"\"\", parse_mode="Markdown")
 
 async def alive(update, context):
     await simulate_typing(update, context)
@@ -126,7 +128,7 @@ async def raj(update, context):
         else:
             await send_and_auto_delete(update, context, text="❌ Only JPG links allowed.")
     else:
-        await send_and_auto_delete(update, context, text="📸 Use: /raj https://example raj.com/image.jpg")
+        await send_and_auto_delete(update, context, text="📸 Use: /raj https://example.com/image.jpg")
 
 async def rajkumar(update, context):
     if photos:
@@ -164,12 +166,12 @@ async def groups_cmd(update, context):
         else:
             await send_and_auto_delete(update, context, text="⚠️ Group not found.")
     else:
-        msg = "\n".join(groups) if groups else "ℹ️ No groups added yet."
-        await send_and_auto_delete(update, context, text=f"📋 Groups:\n{msg}")
+        msg = "\\n".join(groups) if groups else "ℹ️ No groups added yet."
+        await send_and_auto_delete(update, context, text=f"📋 Groups:\\n{msg}")
 
 async def offilter(update, context):
     if not context.args:
-        await send_and_auto_delete(update, context, text="🧠 Use:\n/offilter hi = hello\n/offilter remove hi\n/offilter hi")
+        await send_and_auto_delete(update, context, text="🧠 Use:\\n/offilter hi = hello\\n/offilter remove hi\\n/offilter hi")
         return
     joined = " ".join(context.args)
     if joined.lower().startswith("remove"):
@@ -207,7 +209,7 @@ async def settings_cmd(update, context):
         emoji = emojis.get(cid, "Not set")
         react = "on" if is_reaction_enabled(cid) else "off"
         reply = "on" if is_autoreply_enabled(cid) else "off"
-        await send_and_auto_delete(update, context, text=f"Emoji: {emoji}\nReaction: {react}\nAuto-reply: {reply}\nUse /settings emoji 😍 OR /settings reaction on/off OR /settings autoreply on/off")
+        await send_and_auto_delete(update, context, text=f"Emoji: {emoji}\\nReaction: {react}\\nAuto-reply: {reply}\\nUse /settings emoji 😍 OR /settings reaction on/off OR /settings autoreply on/off")
         return
     if context.args[0] == "emoji" and len(context.args) == 2:
         emojis[cid] = context.args[1]
@@ -230,36 +232,40 @@ async def welcome(update: ChatMemberUpdated, context):
         groups.append(cid)
         save_json(GROUPS_FILE, groups)
 
-# ✅ Group Added Custom Message
-async def group_join_welcome(update: ChatMemberUpdated, context):
-    result = update.chat_member
-    if result.new_chat_member.status in ["member", "administrator", "creator"]:
-        if result.old_chat_member.status == "left":
-            await context.bot.send_message(
-                chat_id=update.chat_member.chat.id,
-                text=(
-                    f"🔰 Hello everyone! aap sabhi ko dhanyvad mere ko is group mein add karne ke liye niche Mera Instagram hai agar baat karna hai to message karna👇.\n"
-                    f"📸 Follow on Instagram: "
-                    f"✅ Powered by 👉@raj_dev_01"
-                )
-            )
-
+# ✅ Smart auto_reply logic
 sent_emojis = {}
+random_text_replies = [
+    "hmm?", "kya bol rahe ho?", "samjha nahi 😅", "tum ajeeb ho 😂", 
+    "phir se bolo...", "main kya karu iska?", "interesting 🤔", 
+    "aur?", "repeat karo please!", "yeh kya tha?"
+]
+
 async def auto_reply(update, context):
     text = update.message.text.lower()
     cid = str(update.effective_chat.id)
-    await simulate_typing(update, context, delay=5.20)
-    if not is_autoreply_enabled(cid): return
+    await simulate_typing(update, context, delay=0.8)
+
+    if not is_autoreply_enabled(cid):
+        return
+
     if text in replies:
         await send_and_auto_delete(update, context, text=replies[text])
-    elif is_reaction_enabled(cid):
-        all_emojis = ["❤️", "😂", "😍", "🔥", "😄", "😎", "🥳", "😘", "💯", "🤖"]
-        used = sent_emojis.get(cid, [])
-        remaining = [e for e in all_emojis if e not in used]
-        emoji = random.choice(remaining or all_emojis)
-        await send_and_auto_delete(update, context, text=emoji)
-        if len(used) >= len(all_emojis): sent_emojis[cid] = []
-        else: used.append(emoji); sent_emojis[cid] = used
+    else:
+        rand = random.random()
+        if rand < 0.3 and is_reaction_enabled(cid):
+            all_emojis = ["❤️", "😂", "😍", "🔥", "😄", "😎", "🥳", "😘", "💯", "🤖"]
+            used = sent_emojis.get(cid, [])
+            remaining = [e for e in all_emojis if e not in used]
+            emoji = random.choice(remaining or all_emojis)
+            await send_and_auto_delete(update, context, text=emoji)
+            if len(used) >= len(all_emojis):
+                sent_emojis[cid] = []
+            else:
+                used.append(emoji)
+                sent_emojis[cid] = used
+        elif rand < 0.5:
+            reply = random.choice(random_text_replies)
+            await send_and_auto_delete(update, context, text=reply)
 
 # Register
 app = ApplicationBuilder().token(TOKEN).build()
@@ -277,7 +283,6 @@ app.add_handler(CommandHandler("groups", groups_cmd))
 app.add_handler(CommandHandler("offilter", offilter))
 app.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), auto_reply))
 app.add_handler(ChatMemberHandler(welcome, ChatMemberHandler.CHAT_MEMBER))
-app.add_handler(ChatMemberHandler(group_join_welcome, ChatMemberHandler.MY_CHAT_MEMBER))
 
 print("🤖 Bot is running... powered by @raj_dev_01")
 app.run_polling()
