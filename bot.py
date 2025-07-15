@@ -58,8 +58,8 @@ async def send_photo_and_auto_delete(update, context, photo):
 
 async def start(update, context):
     await simulate_typing(update, context)
-    await send_and_auto_delete(update, context, text="👋 Welcome! I'm alive and kicking, powered by @raj_dev_01 🚀")
-    await send_and_auto_delete(update, context, text="📸 Follow me on Instagram: https://instagram.com/itz_rajdev")
+    await send_and_auto_delete(update, context, text="👋 Hi kaisi ho isase Milo yah Mera Boss Hai Instagram ID De Diya, powered by @raj_dev_01 🚀")
+    await send_and_auto_delete(update, context, text="📸 Follow me on Instagram: https://www.instagram.com/itz_dminem_official43?igsh=MTZpNGMwOGwwMWl5dA==")
     emojis_list = ["❤️", "🔥", "😍", "😄", "🤖", "🥳", "💯", "😘", "😎", "😂"]
     await send_and_auto_delete(update, context, text=random.choice(emojis_list))
     if photos:
@@ -239,7 +239,7 @@ async def group_join_welcome(update: ChatMemberUpdated, context):
                 chat_id=update.chat_member.chat.id,
                 text=(
                     f"🔰 Hello everyone! aap sabhi ko dhanyvad mere ko is group mein add karne ke liye niche Mera Instagram hai agar baat karna hai to message karna👇.\n"
-                    f"📸 Follow on Instagram: https://www.instagram.com/itz_dminem_official43?igsh=MTZpNGMwOGwwMWl5dA=="
+                    f"📸 Follow on Instagram: "
                     f"✅ Powered by 👉@raj_dev_01"
                 )
             )
