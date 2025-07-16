@@ -5,7 +5,7 @@
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
   # don't remove credit @raj_dev_01
-# don't remove credit @raj_dev_01
+  # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
 from telegram import Update, InputMediaPhoto, ChatMemberUpdated
 from telegram.constants import ChatAction
@@ -43,7 +43,7 @@ def is_auto_delete_enabled(chat_id): return settings.get(chat_id, {}).get("auto_
 def is_reaction_enabled(chat_id): return settings.get(chat_id, {}).get("reaction", True)
 def is_autoreply_enabled(chat_id): return settings.get(chat_id, {}).get("autoreply", True)
 
-async def simulate_typing(update, context, delay=5.20):
+async def simulate_typing(update, context, delay=9.9):
     await context.bot.send_chat_action(chat_id=update.effective_chat.id, action=ChatAction.TYPING)
     await asyncio.sleep(delay)
 
@@ -61,7 +61,7 @@ async def send_photo_and_auto_delete(update, context, photo):
 
 async def start(update, context):
     await simulate_typing(update, context)
-    await send_and_auto_delete(update, context, text="👋 Welcome! I'm alive and kicking, powered by @raj_dev_01 🚀")
+    await send_and_auto_delete(update, context, text="👋  main abhi bhi Jinda Hun बार-बार start mat dabao, powered by @raj_dev_01 🚀")
     if photos:
         await send_photo_and_auto_delete(update, context, random.choice(photos))
 
@@ -230,16 +230,38 @@ async def welcome(update: ChatMemberUpdated, context):
         groups.append(cid)
         save_json(GROUPS_FILE, groups)
 
-# ✅ Updated auto-reply: only daily short text (NO EMOJI)
 random_text_replies = [
-    "ok", "hmm?", "haan", "nahi", "kya haal hai?", "kaise ho?", "main theek hoon", "batao?", "kya chal raha hai?",
-    "samajh gaya", "sahi hai", "mujhe pasand aaya", "accha laga", "repeat karo", "kya bola?", "phir se", "acha", "hmm", "hahaha"
+    "ok", "haan", "nahi", "hmm", "theek hai", "acha", "kya?", "kyun?", "suno", "sun liya",
+    "batao", "thoda ruk", "ruk ja", "wait karo", "kya kar rahe ho?", "haan bhai", "haan yaar", "ab kya?", "kaise ho?", "sab badhiya",
+    "mast", "badiya", "acha laga", "kya scene hai?", "dekhte hain", "samajh gaya", "samajh nahi aaya", "phir se bolo", "kya bola?", "dobara bol",
+    "pata nahi", "mujhe nahi pata", "mujhe samajh gaya", "mujhe laga tha", "sahi hai", "sahi bola", "note kar liya", "haan pakka", "nahi yaar", "ok bhai",
+    "main busy hoon", "baad mein", "abhi nahi", "soch raha hoon", "kaam mein hoon", "ruk ruk", "abhi aaya", "chal theek", "dekh liya", "pata chal gaya",
+    "kar raha hoon", "kar lunga", "kaam ho gaya", "chup raho", "rehne do", "sun ke acha laga", "kya fayda?", "jaldi bol", "maza aaya", "tum bolo",
+    "tumhare liye kuch bhi", "tum bahut cute ho", "pyaar ho gaya", "babu", "baby", "i love you", "mujhe time chahiye", "kar dena", "kar dunga", "kar do",
+    "acha ho gaya", "bura lag gaya", "kaafi ho gaya", "itna kaafi hai", "abhi kaam mein hoon", "later baat karte hain", "kal milte hain", "acha laga sun ke", "haan keh diya", "mujhe pasand aaya",
+    "tumhe kya chahiye?", "tumhare bina boring hai", "tum mast ho", "main thik hoon", "sab thik", "kuch nahi", "kya chal raha hai?", "kya haal hai?", "haan thik", "chal milte hain",
+    "dobara mat bolna", "kya zarurat thi?", "bata nahi sakta", "puchh mat", "kyu poochh rahe ho?", "dil se", "dil chhoo gaya", "mazaak kar raha hoon", "tum samajhdar ho", "aaj mood nahi",
+    "mood off hai", "mood on hai", "bas kar yaar", "mat bol yeh", "bhool gaya", "yaad nahi", "kya yaad dilaya!", "nahi keh sakta", "aisa nahi tha", "aisa kyun?",
+    "tum kuch keh rahe the", "acha bola", "bahut accha", "tum alag ho", "tum smart ho", "tum best ho", "tum great ho", "love you", "miss you", "sun raha hoon",
+    "sun rahi hoon", "acha feel ho raha", "acha lag raha", "tum awesome ho", "super ho", "badhiya ho", "lagta hai busy ho", "busy mat ho", "jaldi wapas aao", "milne aao",
+    "milte hain jaldi", "main bhi", "mujhe bhi", "mujhe accha nahi laga", "kya socha?", "main soch raha", "main likh raha", "likh raha hoon", "kya karna hai?", "karne do",
+    "bata diya", "batata hoon", "bol diya", "bol rahi hoon", "tum sun rahe ho?", "sach mein", "sach bol raha hoon", "tum sach mein mast ho", "tum pagal ho", "main pagal hoon",
+    "acha lagta hai tumse", "tumhari yaad aayi", "tumhara message aaya", "kya likha?", "kya samjha?", "samajh lo", "sun lo", "kya kaam hai?", "kaam karke aata hoon", "so raha hoon",
+    "sone ja raha", "jaag raha hoon", "nind aa rahi", "neend lag rahi", "khana khaya?", "maine khaya", "bhook lagi", "thoda kha lo", "abhi khata hoon", "kha liya",
+    "kya batayein", "kya kahun", "kya bolun", "main toh shock ho gaya", "pagal kar diya", "tumhare chakkar mein", "acha friend ho tum", "best friend ho", "bhai ho tum", "bahan ho tum",
+    "dost ho", "true friend ho", "yaar ho", "mujhe hasi aa rahi", "has raha hoon", "rona aa raha", "ro raha hoon", "ro mat", "haso", "khush raho",
+    "sad mat ho", "tension mat lo", "mujhe tension hai", "tension ho gaya", "kaam ho gaya", "kaam baaki hai", "yeh kya hai?", "accha idea hai", "yeh sahi hai", "naya soch rahe",
+    "old idea hai", "nahi jam raha", "jam gaya", "jam raha", "aaya samajh mein", "aaya dhyan mein", "nahi aaya", "abhi samjha", "abhi padha", "pad raha hoon",
+    "tum kya padh rahe", "padho", "likho", "kaam karo", "kaam chhodo", "phone rakho", "phone uthao", "phone mein ho", "network gaya", "abhi aaya",
+    "bye", "good night", "good morning", "good evening", "namaste", "pranam", "shubh ratri", "shubh prabhat", "jai shree ram", "radhe radhe"
 ]
+
+
 
 async def auto_reply(update, context):
     text = update.message.text.lower()
     cid = str(update.effective_chat.id)
-    await simulate_typing(update, context, delay=0.8)
+    await simulate_typing(update, context, delay=30)
     if not is_autoreply_enabled(cid): return
     if text in replies:
         await send_and_auto_delete(update, context, text=replies[text])
@@ -247,7 +269,7 @@ async def auto_reply(update, context):
         reply = random.choice(random_text_replies)
         await send_and_auto_delete(update, context, text=reply)
 
-# Register
+# Register handlers
 app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("help", help_command))
@@ -266,6 +288,7 @@ app.add_handler(ChatMemberHandler(welcome, ChatMemberHandler.CHAT_MEMBER))
 
 print("🤖 Bot is running... powered by @raj_dev_01")
 app.run_polling()
+
                       
 # don't remove credit @raj_dev_01
 # don't remove credit @raj_dev_01
