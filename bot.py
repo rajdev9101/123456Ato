@@ -43,7 +43,7 @@ def is_auto_delete_enabled(chat_id): return settings.get(chat_id, {}).get("auto_
 def is_reaction_enabled(chat_id): return settings.get(chat_id, {}).get("reaction", True)
 def is_autoreply_enabled(chat_id): return settings.get(chat_id, {}).get("autoreply", True)
 
-async def simulate_typing(update, context, delay=4.9):
+async def simulate_typing(update, context, delay=0.8):
     await context.bot.send_chat_action(chat_id=update.effective_chat.id, action=ChatAction.TYPING)
     await asyncio.sleep(delay)
 
@@ -261,7 +261,7 @@ random_text_replies = [
 async def auto_reply(update, context):
     text = update.message.text.lower()
     cid = str(update.effective_chat.id)
-    await simulate_typing(update, context, delay=8.8)
+    await simulate_typing(update, context, delay=5.8)
     if not is_autoreply_enabled(cid): return
     if text in replies:
         await send_and_auto_delete(update, context, text=replies[text])
