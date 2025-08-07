@@ -14,7 +14,7 @@ from gtts import gTTS
 from io import BytesIO
 import asyncio, json, random, os, time
 
-TOKEN = "7793783847:AAGzbCWu1WF94yzf2_HYNbljISuFLvy5XG0"
+TOKEN = "BOT_TOKEN"
 DELETE_DELAY = 5 * 60 * 60
 
 REPLIES_FILE = "replies.json"
