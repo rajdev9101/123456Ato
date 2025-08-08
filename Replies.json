@@ -1,0 +1,33 @@
+{
+    "keywords": {
+        "hi": "Hello 👋",
+        "hello": "Hi there! 😊",
+        "bye": "Goodbye! 👋",
+        "thanks": "You’re welcome! 🙏",
+        "how are you": "I’m doing great, thanks for asking! 😊",
+        "good morning": "Good morning! ☀️",
+        "good night": "Good night! 🌙",
+        "ok": "Okay 👍",
+        "yes": "Yes ✅",
+        "no": "No ❌"
+    },
+    "questions": [
+        "That’s an interesting question 🤔",
+        "Hmm, let me think 💡",
+        "I’ll try to find the answer 🔍",
+        "Possibly 👍",
+        "It depends 🤷",
+        "Yes, I believe so ✅",
+        "No, I don’t think so ❌"
+    ],
+    "messages": [
+        "Got your message ✅",
+        "Okay 👍",
+        "Noted 📝",
+        "I understand ✔️",
+        "Cool 😎",
+        "Alright 👍",
+        "Sounds good 👌",
+        "Sure thing ✅"
+    ]
+}
