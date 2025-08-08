@@ -1,12 +1,5 @@
  {
-        "hi": "Hello 👋",
-        "hello": "Hi there! 😊",
-        "bye": "Goodbye! 👋",
-        "thanks": "You’re welcome! 🙏",
-        "how are you": "I’m doing great, thanks for asking! 😊",
-        "good morning": "Good morning! ☀️",
-        "good night": "Good night! 🌙",
-        "ok": "Okay 👍",
-        "yes": "Yes ✅",
-        "no": "No ❌"
-    }
+    "hi": "hello",
+    "how are you": "I am fine, thank you",
+    "what is your name": "My name is AutoBot"
+ }
