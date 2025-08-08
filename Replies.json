@@ -1,5 +1,4 @@
-{
-    "keywords": {
+ {
         "hi": "Hello 👋",
         "hello": "Hi there! 😊",
         "bye": "Goodbye! 👋",
@@ -10,24 +9,4 @@
         "ok": "Okay 👍",
         "yes": "Yes ✅",
         "no": "No ❌"
-    },
-    "questions": [
-        "That’s an interesting question 🤔",
-        "Hmm, let me think 💡",
-        "I’ll try to find the answer 🔍",
-        "Possibly 👍",
-        "It depends 🤷",
-        "Yes, I believe so ✅",
-        "No, I don’t think so ❌"
-    ],
-    "messages": [
-        "Got your message ✅",
-        "Okay 👍",
-        "Noted 📝",
-        "I understand ✔️",
-        "Cool 😎",
-        "Alright 👍",
-        "Sounds good 👌",
-        "Sure thing ✅"
-    ]
-}
+    }
